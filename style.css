@@ -1,0 +1,143 @@
+embed {
+width: 0px;
+height: 0px;
+transition: 0.3s;
+}
+body {
+background-color: #00001b;
+}
+#appendHost {
+border: none;
+background-color: inherit;
+}
+#minimizer {
+border: none;
+color: white;
+padding: 6px;
+background-color: inherit;
+transition: 0.3s;
+}
+#closeButton {
+border: none;
+color: white;
+padding: 6px;
+background-color: inherit;
+transition: 0.3s;
+}
+#fullscreenButton {
+border: none;
+color: white;
+padding: 6px;
+background-color: inherit;
+transition: 0.3s;
+}
+#searchButton {
+border: none;
+color: white;
+padding: 6px;
+background-color: inherit;
+transition: 0.3s;
+}
+#queryButton {
+border: none;
+color: white;
+padding: 6px;
+background-color: inherit;
+transition: 0.3s;
+}
+#minimizer:hover {
+border: none;
+color: black;
+background-color: white;
+border-radius: 30px;
+padding: 14px 16px;
+}
+#closeButton:hover {
+border: none;
+color: black;
+background-color: white;
+border-radius: 30px;
+padding: 14px 16px;
+}
+#fullscreenButton:hover {
+border: none;
+color: black;
+background-color: white;
+border-radius: 30px;
+padding: 14px 16px;
+}
+#searchButton:hover {
+border: none;
+color: black;
+background-color: white;
+border-radius: 30px;
+padding: 14px 16px;
+}
+#queryButton:hover {
+border: none;
+color: black;
+background-color: white;
+border-radius: 30px;
+padding: 14px 16px;
+}
+#searchBar {
+background-color: inherit;
+border-color: white;
+border-width: 0px;
+overflow: hidden;
+border-radius: 0px;
+transition: 0.3s;
+color: white;
+}
+#searchBar:hover {
+background-color: inherit;
+border-color: white;
+border-width: 3px;
+overflow: hidden;
+border-radius: 30px;
+padding: 14px 16px;
+}
+#createTabButton {
+border: none;
+color: white;
+background-color: inherit;
+transition: 0.3s;
+}
+#createTabButton:hover {
+border: none;
+color: black;
+background-color: white;
+border-radius: 30px;
+padding: 14px 16px;
+}
+#passErrorBox {
+opacity: 1;
+transition: 0.3s;
+}
+#bookmarkDropdown {
+border: none;
+color: white;
+background-color: inherit;
+transition: 0.3s;
+}
+#bookmarkDropdown:hover {
+border: none;
+color: black;
+background-color: white;
+border-radius: 30px;
+padding: 14px 16px;
+}
+#bookmarkButton {
+border: none;
+color: white;
+padding: 6px;
+background-color: inherit;
+transition: 0.3s;
+}
+#bookmarkButton:hover {
+border: none;
+color: black;
+background-color: white;
+border-radius: 30px;
+padding: 14px 16px;
+}
