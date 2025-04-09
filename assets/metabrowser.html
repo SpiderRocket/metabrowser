@@ -1,0 +1,184 @@
+<html>
+  <head>
+    <title>MetaBrowser</title>
+    <meta charset="UTF-8">
+    <style>
+      .tabs {
+        background-color: #e4e4e4;
+        padding: 6px 6px;
+        max-height: 60px;
+        display: flex;
+      }
+      .tab {
+        background-color: #e4e4e4;
+        padding: 6px 6px;
+        border-color: #e4e4e4;
+        border-width: 10px;
+        border-radius: 6px;
+        width: 99.2%;
+        flex: 1;
+        transition: 0.5s;
+      }
+      #new-tab-button {
+        width: 10%;
+        flex: 0;
+        background-color: #e4e4e4;
+        border: none;
+        padding: 10px;
+      }
+      embed {
+        width: 100%;
+        height: 800px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="tabs">
+      <div class="tab" id="default-tab" style="background-color: #ffffff;">New Tab</div>
+      <button id="new-tab-button" onclick="addNewTab()">+</button>
+    </div>
+
+    <div class="tab-pages">
+      <div class="tab-content" id="default-content">
+        <input placeholder="Search for a website..." id="default-input"><br>
+        <embed type="text/html" id="default-result">
+        <button id="default-full">Fullscreen</button>
+      </div>
+    </div>
+    <script>
+      let searchMode;
+      console.log("hi");
+      console.log("test");
+      window.onload = function() {
+        searchMode = 'tab';
+        document.querySelector("#default-full").addEventListener("click", function() {
+          document.querySelector("#default-result").requestFullscreen();
+        });
+        document.querySelector("#default-input").addEventListener("keydown", function(event) {
+          if(event.key === "Enter") {
+            event.preventDefault();
+            if (searchMode === 'tab') {
+              document.querySelector("#default-result").src = this.value;
+
+            } else if (searchMode === 'window') {
+              let win = window.open('', '', `width=${window.outerWidth}px, height=${window.outerHeight}px, resizable=yes, fullscreen=yes`);
+              win.document.write(`<!DOCTYPE html>
+<html>
+<head>
+<title>MetaWindow</title>
+<meta charset='UTF-8'>
+      </head>
+<body>
+<embed style="width:1500px; height:800px;" type='text/html' src="${this.value}">
+      </body>
+      </html>`);
+              win.document.close();
+              this.value = '';
+            }
+          }
+        });
+      }
+      function selectTab() {
+        for(let i = 0; i < document.querySelectorAll(".tab").length; i++) {
+          document.querySelectorAll(".tab")[i].style.backgroundColor = '#d9d9d9';
+        }
+        this.style.backgroundColor = "#ffffff";
+      }
+      function addNewTab() {
+        let tab = document.createElement("div");
+        tab.className = "tab";
+        let tabNode = document.createTextNode("New Tab");
+        tab.appendChild(tabNode);
+        tab.addEventListener("click", function() {
+          for(let i = 0; i < document.querySelectorAll(".tab").length; i++) {
+            document.querySelectorAll(".tab")[i].style.backgroundColor = '#e4e4e4';
+          }
+          this.style.backgroundColor = "#ffffff";
+          loadTabContent();
+          if (document.querySelector(".active-tab") !== null || document.querySelector(".active-content") !== null) {
+            for(let z = 0; z < document.querySelectorAll(".active-tab").length; z++) {
+              document.querySelectorAll(".active-tab")[z].classList.remove("active-tab");
+              document.querySelectorAll(".active-content")[z].classList.remove("active-content");
+            }
+          }
+          if (document.querySelector("#default-tab").classList.contains("default-is-selected")) {
+          	document.querySelector("#default-tab").classList.remove("default-is-selected");
+          }
+          tab.classList.add("active-tab");
+          tabContent.classList.add("active-content");
+        });
+        document.querySelector(".tabs").insertBefore(tab, document.querySelector("#new-tab-button"));
+        let tabContent = document.createElement("div");
+        tabContent.style.display = 'none';
+        tabContent.className = 'tab-content';
+        let tabResult = document.createElement("embed");
+        tabResult.style.width = '100%';
+        tabResult.style.height = '800px';
+        tabResult.setAttribute("type", "text/html");
+        let tabSearch = document.createElement("input");
+        tabSearch.setAttribute("placeholder", "Search for a website...");
+        tabSearch.addEventListener("keydown", function(event) {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            if (searchMode === 'tab') {
+              tabResult.src = this.value;
+            } else if (searchMode === 'window') {
+              let win = window.open('', '', `width=${window.outerWidth}px, height=${window.outerHeight}px, resizable=yes, fullscreen=yes`);
+              win.document.write(`<!DOCTYPE html>
+<html>
+<head>
+<title>MetaWindow</title>
+<meta charset='UTF-8'>
+      </head>
+<body>
+<embed style="width:1500px; height:800px;" type='text/html' src="${this.value}">
+      </body>
+      </html>`);
+              win.document.close();
+              this.value = '';
+            }
+          }
+        });
+        let tabFullscreen = document.createElement("button");
+        tabFullscreen.addEventListener("click", function() {
+          tabResult.requestFullscreen();
+        });
+        tabFullscreen.textContent = 'Fullscreen';
+        let tabBreak = document.createElement("br");
+        tabContent.appendChild(tabSearch);
+        tabContent.appendChild(tabBreak);
+        tabContent.appendChild(tabResult);
+        tabContent.appendChild(tabFullscreen);
+        document.querySelector(".tab-pages").appendChild(tabContent);
+        document.addEventListener("keydown", function(event) {
+          if (event.ctrlKey && event.key === "w" && !document.querySelector("#default-tab").classList.contains(".default-is-selected")) {
+            event.preventDefault();
+            document.querySelector(".active-tab").remove();
+            document.querySelector(".active-content").remove();
+            document.querySelector("#default-tab").click();
+          } else if (event.key === "w" && event.ctrlKey) {
+            event.preventDefault();
+            alert("false");
+          }
+        });
+        function loadTabContent() {
+          for (let i = 0; i < document.querySelectorAll(".tab-content").length; i++) {
+            document.querySelectorAll(".tab-content")[i].style.display = 'none';
+            tabContent.style.display = 'block';
+          }
+        }
+      }
+      document.querySelector("#default-tab").addEventListener("click", function() {
+        for(let i = 0; i < document.querySelectorAll(".tab").length; i++) {
+          document.querySelectorAll(".tab")[i].style.backgroundColor = '#e4e4e4';
+          this.classList.add("default-is-selected");
+        }
+        for (let j = 0; j < document.querySelectorAll(".tab-content").length; j++) {
+          document.querySelectorAll(".tab-content")[j].style.display = 'none';
+        }
+        document.querySelector("#default-content").style.display = 'block';
+        this.style.backgroundColor = "#ffffff";
+      });
+    </script>
+  </body>
+</html>
