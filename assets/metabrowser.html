@@ -58,7 +58,7 @@
           if(event.key === "Enter") {
             event.preventDefault();
             if (searchMode === 'tab') {
-              document.querySelector("#default-result").src = this.value;
+              document.querySelector("#default-result").src = `${this.value}`;
 
             } else if (searchMode === 'window') {
               let win = window.open('', '', `width=${window.outerWidth}px, height=${window.outerHeight}px, resizable=yes, fullscreen=yes`);
