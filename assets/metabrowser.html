@@ -179,15 +179,17 @@
         document.querySelector("#default-content").style.display = 'block';
         this.style.backgroundColor = "#ffffff";
       });
-       window.addEventListener("message", function(event) {
-        if (event.origin !== "https://codepen.io/SpiderRocket-the-animator/pen/raNYQz") {
-          window.location.href = "https://example.com";
-          alert("hi");
-        } else {
-          alert("Received message:", event.data);
-          // Handle the message
-        }
-      });
+      document.addEventListener("DOMContentLoaded", function() {
+        window.addEventListener("message", function(event) {
+          if (event.origin !== "https://codepen.io/SpiderRocket-the-animator/pen/raNYQz") {
+            window.location.href = "https://example.com";
+            alert("hi");
+          } else {
+            alert("Received message:", event.data);
+            // Handle the message
+          }
+        });
+      }
     </script>
   </body>
 </html>
